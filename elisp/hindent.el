@@ -287,6 +287,11 @@ work."
                          #'(lambda ()
                              (when (search-forward-regexp "[\n]+[^ \n]" nil t 1)
                                (cond
+                                ((hindent-in-comment)
+                                 (forward-char -1)
+                                 (search-backward-regexp "[^\n ]" nil t)
+                                 (forward-char)
+                                 (point))
                                 ((save-excursion (goto-char (line-beginning-position))
                                                  (looking-at "|]"))
                                  (jump))
